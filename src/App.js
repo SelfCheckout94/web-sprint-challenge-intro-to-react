@@ -2,11 +2,11 @@ import "./App.css";
 
 import React, { useEffect, useState } from "react";
 
-import Characters from "./components/Character";
+import Character from "./components/Character";
 import axios from "axios";
 
 const App = () => {
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
 
@@ -16,17 +16,16 @@ const App = () => {
   useEffect(
     () =>
       axios
-        .get(`https://swapi.dev/api/people`)
+        .get(`https://swapi.dev/api/people/`)
         .then((res) => setData(res.data))
         .catch((err) => console.error(err)),
     []
   );
-
   return (
     <div className="App">
       <h1 className="Header">Characters</h1>
       {data.map((obj) => {
-        return <Characters name={obj.name} />;
+        return <Character key={obj.height} name={obj.name} />;
       })}
     </div>
   );
